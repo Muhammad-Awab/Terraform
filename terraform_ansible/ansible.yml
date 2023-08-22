@@ -1,0 +1,19 @@
+--- 
+- hosts: all
+  become: yes
+  become_user: root
+  tasks: 
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Nginx installing
+      apt:
+        name: nginx
+        state: present
+        install_recommends: no   # Optional: To avoid installing recommended packages
+
+    - name: Start nginx
+      service:
+        name: nginx
+        state: started
